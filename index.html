@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form id="">
+        <p><span>E-Mail: </span><input id="e-mail" type="email"></p>
+        <p><span>Senha: </span><input id="senha" type="password"></p>
+        <a onclick="resposta()">Enviar</a>
+    </form>
+
+    <script>
+        const link = "http://localhost:3000/login"
+
+        function requisicao() {
+            let usuario = document.getElementById("e-mail").value
+            let senha = document.getElementById("senha").value
+            
+            return fetch(link, {
+                method: "POST",
+                body: {
+                    "usuario": usuario, 
+                    "senha": senha
+                }
+            })
+            .then(data => data.json())
+            .catch(err => console.log(err))
+        }
+
+        async function resposta() {
+            const resultado = await requisicao()
+            console.log(resultado)
+        }
+    </script>
+</body>
+</html>
