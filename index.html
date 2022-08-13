@@ -10,7 +10,7 @@
     <form id="">
         <p><span>E-Mail: </span><input id="e-mail" type="email"></p>
         <p><span>Senha: </span><input id="senha" type="password"></p>
-        <a onclick="resposta()">Enviar</a>
+        <a onclick="login()">Enviar</a>
     </form>
 
     <script>
@@ -31,9 +31,15 @@
             .catch(err => console.log(err))
         }
 
-        async function resposta() {
-            const resultado = await requisicao()
-            console.log(resultado)
+        async function login() {
+            const res = await requisicao()
+            if (!res.err) {
+                localStorage.setItem("token", res.token)
+                alert("Login efetuado com sucesso")
+                window.location.href = "home.html"
+            } else {
+                alert(res.err)
+            }
         }
     </script>
 </body>
